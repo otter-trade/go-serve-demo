@@ -93,8 +93,8 @@ type (
 )
 
 @server(
-    jwt: Auth
-    middleware: CorsMiddleware,CheckSignMiddleware,TokenMiddleware
+//    jwt: Auth
+    middleware: CorsMiddleware,CheckSignMiddleware
     prefix: /api
     group: admin
 )

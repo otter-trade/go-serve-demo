@@ -13,7 +13,7 @@ import (
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CorsMiddleware, serverCtx.CheckSignMiddleware, serverCtx.TokenMiddleware},
+			[]rest.Middleware{serverCtx.CorsMiddleware, serverCtx.CheckSignMiddleware},
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
@@ -42,7 +42,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 			}...,
 		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/admin"),
+		rest.WithPrefix("/api"),
 	)
 }

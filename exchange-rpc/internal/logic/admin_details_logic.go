@@ -25,9 +25,10 @@ func NewAdminDetailsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Admi
 
 // 获取管理员
 func (l *AdminDetailsLogic) AdminDetails(in *pb.AdminDetailsReq) (resp *pb.AdminDetailsResp, err error) {
-	// todo: add your logic here and delete this line
 	l.Infow("AdminDetails start", logx.Field("in", in))
 	resp = &pb.AdminDetailsResp{}
 
-	return resp, nil
+	// 查数据、做逻辑
+
+	return
 }
