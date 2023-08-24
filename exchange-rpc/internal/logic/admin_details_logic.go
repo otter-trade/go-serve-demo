@@ -38,6 +38,7 @@ func (l *AdminDetailsLogic) AdminDetails(in *pb.AdminDetailsReq) (resp *pb.Admin
 		l.Errorw("AdminAdd", logx.Field("in", in), logx.Field("err", err))
 		return
 	}
+
 	defer func() {
 		if err = client.Disconnect(context.Background()); err != nil {
 			l.Errorw("AdminAdd", logx.Field("in", in), logx.Field("err", err))

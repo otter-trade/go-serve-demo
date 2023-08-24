@@ -9,7 +9,7 @@ Etcd:
   - 127.0.0.1:2379
 
 MongoUri:
-  Uri: mongodb://exchange:g4Lv7cj5GwnAsRPiQe1UhlOya3trVzH8@43.134.199.163:27017
+  Uri: mongodb://exchange:g4Lv7cj5GwnAsRPiQe1UhlOya3trVzH8@43.134.199.163:27017/?directConnection=true&authSource=exchange&authMechanism=SCRAM-SHA-256
   Db: exchange
   PoolSize: 200
 

@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"github.com/otter-trade/go-serve-demo/common/helpers"
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/internal/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -49,6 +50,7 @@ func (l *AdminAddLogic) AdminAdd(in *pb.AdminAddReq) (resp *pb.AdminAddResp, err
 	collection := client.Database(l.svcCtx.Config.MongoUri.Db).Collection("admin")
 	// 插入文档
 	admin := models.Admin{
+		ID:        helpers.GetUUID(),
 		Name:      "John",
 		Email:     "kim@qq.com",
 		CreatedAt: time.Now().Format(time.DateTime),
@@ -69,9 +71,11 @@ func (l *AdminAddLogic) AdminAdd(in *pb.AdminAddReq) (resp *pb.AdminAddResp, err
 		return
 	}
 
+	l.Infow("result", logx.Field("result", result))
+
 	// 更新文档
-	update := bson.M{"$set": bson.M{"age": 35}}
-	_, err = collection.UpdateOne(l.ctx, filter, update)
+	update := bson.M{"$set": bson.M{"email": "888@qq.com"}}
+	_, err = collection.UpdateOne(l.ctx, bson.M{"_id": result.ID}, update)
 	if err != nil {
 		l.Errorw("AdminAdd", logx.Field("in", in), logx.Field("err", err))
 		return
