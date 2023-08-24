@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/internal/svc"
-	"github.com/otter-trade/go-serve-demo/exchange-rpc/model"
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/pb"
 	"github.com/zeromicro/go-zero/core/stores/mon"
 	"go.mongodb.org/mongo-driver/bson"
@@ -49,7 +48,7 @@ func (l *AdminAddLogic) AdminAdd(in *pb.AdminAddReq) (resp *pb.AdminAddResp, err
 	// 选择数据库和集合
 	//collection := client.Database(l.svcCtx.Config.MongoUri.Db).Collection("admin")
 	// 插入文档
-	admin := model.Admin{
+	admin := models.Admin{
 		ID:       primitive.NewObjectID(),
 		Name:     "John",
 		Email:    "kim@qq.com",
@@ -64,7 +63,7 @@ func (l *AdminAddLogic) AdminAdd(in *pb.AdminAddReq) (resp *pb.AdminAddResp, err
 
 	// 查询文档
 	filter := bson.M{"name": "John"}
-	var result model.Admin
+	var result models.Admin
 	err = collection.FindOne(l.ctx, &result, filter)
 	if err != nil {
 		l.Errorw("AdminAdd", logx.Field("in", in), logx.Field("err", err))

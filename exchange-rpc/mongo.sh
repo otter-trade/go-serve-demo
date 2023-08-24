@@ -1,3 +1,3 @@
 #!/bin/bash
 
-goctl model mongo --type admin --dir="model"
+goctl model mongo -style go_zero --dir="model" --type user
