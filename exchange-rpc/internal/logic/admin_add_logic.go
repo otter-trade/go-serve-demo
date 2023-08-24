@@ -4,13 +4,11 @@ import (
 	"context"
 	"github.com/otter-trade/go-serve-demo/common/helpers"
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/internal/models"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
-	"time"
-
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/internal/svc"
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/pb"
+	"github.com/zeromicro/go-zero/core/stores/mon"
+	"go.mongodb.org/mongo-driver/bson"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -34,20 +32,22 @@ func (l *AdminAddLogic) AdminAdd(in *pb.AdminAddReq) (resp *pb.AdminAddResp, err
 	l.Infow("AdminAdd start", logx.Field("in", in))
 	resp = &pb.AdminAddResp{}
 
-	client, err := mongo.Connect(l.ctx, options.Client().ApplyURI(l.svcCtx.Config.MongoUri.Uri).SetMaxPoolSize(l.svcCtx.Config.MongoUri.PoolSize))
-	if err != nil {
-		l.Errorw("AdminAdd", logx.Field("in", in), logx.Field("err", err))
-		return
-	}
-	defer func() {
-		if err = client.Disconnect(context.Background()); err != nil {
-			l.Errorw("AdminAdd", logx.Field("in", in), logx.Field("err", err))
-			return
-		}
-	}()
+	collection := mon.MustNewModel(l.svcCtx.Config.MongoUri.Uri, l.svcCtx.Config.MongoUri.Db, "admin")
+
+	//client, err := mongo.Connect(l.ctx, options.Client().ApplyURI(l.svcCtx.Config.MongoUri.Uri).SetMaxPoolSize(l.svcCtx.Config.MongoUri.PoolSize))
+	//if err != nil {
+	//	l.Errorw("AdminAdd", logx.Field("in", in), logx.Field("err", err))
+	//	return
+	//}
+	//defer func() {
+	//	if err = client.Disconnect(context.Background()); err != nil {
+	//		l.Errorw("AdminAdd", logx.Field("in", in), logx.Field("err", err))
+	//		return
+	//	}
+	//}()
 
 	// 选择数据库和集合
-	collection := client.Database(l.svcCtx.Config.MongoUri.Db).Collection("admin")
+	//collection := client.Database(l.svcCtx.Config.MongoUri.Db).Collection("admin")
 	// 插入文档
 	admin := models.Admin{
 		ID:        helpers.GetUUID(),
@@ -65,7 +65,7 @@ func (l *AdminAddLogic) AdminAdd(in *pb.AdminAddReq) (resp *pb.AdminAddResp, err
 	// 查询文档
 	filter := bson.M{"name": "John"}
 	var result models.Admin
-	err = collection.FindOne(l.ctx, filter).Decode(&result)
+	err = collection.FindOne(l.ctx, &result, filter)
 	if err != nil {
 		l.Errorw("AdminAdd", logx.Field("in", in), logx.Field("err", err))
 		return
