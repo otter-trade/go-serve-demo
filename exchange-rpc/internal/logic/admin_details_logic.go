@@ -2,11 +2,12 @@ package logic
 
 import (
 	"context"
-	"github.com/otter-trade/go-serve-demo/exchange-rpc/internal/models"
+	"github.com/otter-trade/go-serve-demo/exchange-rpc/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"time"
 
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/internal/svc"
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/pb"
@@ -60,7 +61,7 @@ func (l *AdminDetailsLogic) AdminDetails(in *pb.AdminDetailsReq) (resp *pb.Admin
 		return nil, result.Err()
 	}
 
-	u := new(models.Admin)
+	u := new(model.Admin)
 	if err := result.Decode(u); err != nil {
 		return nil, err
 	}
@@ -68,8 +69,8 @@ func (l *AdminDetailsLogic) AdminDetails(in *pb.AdminDetailsReq) (resp *pb.Admin
 		Id:        in.Id,
 		Name:      u.Name,
 		Email:     u.Email,
-		CreatedAt: u.CreatedAt,
-		UpdatedAt: u.UpdatedAt,
+		CreatedAt: u.CreateAt.Format(time.DateTime),
+		UpdatedAt: u.CreateAt.Format(time.DateTime),
 	}, nil
 
 	return

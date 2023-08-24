@@ -2,12 +2,12 @@ package logic
 
 import (
 	"context"
-	"github.com/otter-trade/go-serve-demo/common/helpers"
-	"github.com/otter-trade/go-serve-demo/exchange-rpc/internal/models"
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/internal/svc"
+	"github.com/otter-trade/go-serve-demo/exchange-rpc/model"
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/pb"
 	"github.com/zeromicro/go-zero/core/stores/mon"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -49,12 +49,12 @@ func (l *AdminAddLogic) AdminAdd(in *pb.AdminAddReq) (resp *pb.AdminAddResp, err
 	// 选择数据库和集合
 	//collection := client.Database(l.svcCtx.Config.MongoUri.Db).Collection("admin")
 	// 插入文档
-	admin := models.Admin{
-		ID:        helpers.GetUUID(),
-		Name:      "John",
-		Email:     "kim@qq.com",
-		CreatedAt: time.Now().Format(time.DateTime),
-		UpdatedAt: time.Now().Format(time.DateTime),
+	admin := model.Admin{
+		ID:       primitive.NewObjectID(),
+		Name:     "John",
+		Email:    "kim@qq.com",
+		UpdateAt: time.Now(),
+		CreateAt: time.Now(),
 	}
 	_, err = collection.InsertOne(l.ctx, admin)
 	if err != nil {
@@ -64,7 +64,7 @@ func (l *AdminAddLogic) AdminAdd(in *pb.AdminAddReq) (resp *pb.AdminAddResp, err
 
 	// 查询文档
 	filter := bson.M{"name": "John"}
-	var result models.Admin
+	var result model.Admin
 	err = collection.FindOne(l.ctx, &result, filter)
 	if err != nil {
 		l.Errorw("AdminAdd", logx.Field("in", in), logx.Field("err", err))
@@ -75,6 +75,12 @@ func (l *AdminAddLogic) AdminAdd(in *pb.AdminAddReq) (resp *pb.AdminAddResp, err
 
 	// 更新文档
 	update := bson.M{"$set": bson.M{"email": "888@qq.com"}}
+
+	//objectID, err := primitive.ObjectIDFromHex(result.ID.String())
+	//if err != nil {
+	//	return nil, err
+	//}
+
 	_, err = collection.UpdateOne(l.ctx, bson.M{"_id": result.ID}, update)
 	if err != nil {
 		l.Errorw("AdminAdd", logx.Field("in", in), logx.Field("err", err))
