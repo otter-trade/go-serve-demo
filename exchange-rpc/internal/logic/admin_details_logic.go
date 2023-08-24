@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"github.com/otter-trade/go-serve-demo/exchange-rpc/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -60,7 +61,7 @@ func (l *AdminDetailsLogic) AdminDetails(in *pb.AdminDetailsReq) (resp *pb.Admin
 		return nil, result.Err()
 	}
 
-	u := new(models.Admin)
+	u := new(model.Admin)
 	if err := result.Decode(u); err != nil {
 		return nil, err
 	}
