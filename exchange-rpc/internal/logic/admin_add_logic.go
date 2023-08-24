@@ -75,5 +75,7 @@ func (l *AdminAddLogic) AdminAdd(in *pb.AdminAddReq) (resp *pb.AdminAddResp, err
 		return
 	}
 
+	//l.svcCtx.Redis.Set("", "")
+
 	return resp, nil
 }

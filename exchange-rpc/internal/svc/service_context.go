@@ -12,6 +12,7 @@ type ServiceContext struct {
 	Redis  *redis.Redis
 
 	AdminModel model.AdminModel
+	UserModel  model.UserModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -24,5 +25,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Config:     c,
 		Redis:      rds,
 		AdminModel: model.NewAdminModel(c.MongoUri.Uri, c.MongoUri.Db, "admin"),
+		UserModel:  model.NewUserModel(c.MongoUri.Uri, c.MongoUri.Db, "user"),
 	}
 }

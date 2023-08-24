@@ -30,6 +30,7 @@ func (l *JobService) SendMessage() {
 	crontab := cron.New(cron.WithSeconds()) //精确到秒
 
 	crontab.AddFunc("0 */10 * * * ?", func() {
+		//
 		l.Infow(" start", logx.Field("in", time.Now().Format(time.DateTime)))
 	})
 
