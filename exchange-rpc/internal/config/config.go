@@ -8,4 +8,11 @@ import (
 type Config struct {
 	zrpc.RpcServerConf
 	RedisConf redis.RedisConf
+	MongoUri  MongoUri
+}
+
+type MongoUri struct {
+	Uri      string
+	Db       string
+	PoolSize uint64
 }

@@ -13,30 +13,17 @@ import (
 )
 
 type (
-	Access            = pb.Access
-	AccessAddReq      = pb.AccessAddReq
-	AccessAddResp     = pb.AccessAddResp
-	AccessDeleteReq   = pb.AccessDeleteReq
-	AccessDeleteResp  = pb.AccessDeleteResp
-	AccessDetailsReq  = pb.AccessDetailsReq
-	AccessDetailsResp = pb.AccessDetailsResp
-	AccessListReq     = pb.AccessListReq
-	AccessListResp    = pb.AccessListResp
-	AccessSearchReq   = pb.AccessSearchReq
-	AccessSearchResp  = pb.AccessSearchResp
-	AccessUpdateReq   = pb.AccessUpdateReq
-	AccessUpdateResp  = pb.AccessUpdateResp
-	Admin             = pb.Admin
-	AdminAddReq       = pb.AdminAddReq
-	AdminAddResp      = pb.AdminAddResp
-	AdminDeleteReq    = pb.AdminDeleteReq
-	AdminDeleteResp   = pb.AdminDeleteResp
-	AdminDetailsReq   = pb.AdminDetailsReq
-	AdminDetailsResp  = pb.AdminDetailsResp
-	AdminSearchReq    = pb.AdminSearchReq
-	AdminSearchResp   = pb.AdminSearchResp
-	AdminUpdateReq    = pb.AdminUpdateReq
-	AdminUpdateResp   = pb.AdminUpdateResp
+	Admin            = pb.Admin
+	AdminAddReq      = pb.AdminAddReq
+	AdminAddResp     = pb.AdminAddResp
+	AdminDeleteReq   = pb.AdminDeleteReq
+	AdminDeleteResp  = pb.AdminDeleteResp
+	AdminDetailsReq  = pb.AdminDetailsReq
+	AdminDetailsResp = pb.AdminDetailsResp
+	AdminSearchReq   = pb.AdminSearchReq
+	AdminSearchResp  = pb.AdminSearchResp
+	AdminUpdateReq   = pb.AdminUpdateReq
+	AdminUpdateResp  = pb.AdminUpdateResp
 
 	Exchange interface {
 		// -----------------------管理员-----------------------

@@ -16,7 +16,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 	// initialize redis
 	rds := c.RedisConf.NewRedis()
-	logx.Info("Initialize redis connection successfully")
 
 	return &ServiceContext{
 		Config: c,

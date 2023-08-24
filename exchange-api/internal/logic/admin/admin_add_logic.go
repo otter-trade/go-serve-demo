@@ -2,6 +2,7 @@ package admin
 
 import (
 	"context"
+	"github.com/otter-trade/go-serve-demo/exchange-rpc/exchange"
 	"net/http"
 
 	"github.com/otter-trade/go-serve-demo/exchange-api/internal/svc"
@@ -27,8 +28,14 @@ func NewAdminAddLogic(r *http.Request, svcCtx *svc.ServiceContext) *AdminAddLogi
 }
 
 func (l *AdminAddLogic) AdminAdd(req *types.AdminAddReq) (resp *types.AdminCommonResp, err error) {
-	// todo: add your logic here and delete this line
 	l.Infow("AdminAdd start", logx.Field("req", req))
+	resp = &types.AdminCommonResp{}
+
+	_, err = l.svcCtx.Exchange.AdminAdd(l.ctx, &exchange.AdminAddReq{
+		Name:     req.Name,
+		Email:    req.Email,
+		Password: req.Password,
+	})
 
 	return
 }
