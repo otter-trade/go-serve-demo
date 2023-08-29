@@ -18,9 +18,22 @@ RedisConf:
   Type: node
   Pass: G62m50oigInC30sf
 
+#Monitoring
+Prometheus:
+  Host: 127.0.0.1
+  Port: 4009
+  Path: /metrics
+
+#Link Tracking
+Telemetry:
+  Name: exchange-api
+  Endpoint: http://127.0.0.1:14268/api/traces
+  Sampler: 1.0
+  Batcher: jaeger
+
 Log:
   ServiceName: exchange-rpc
-  Mode: console
+  Mode: file
   Path: /data/logs/exchange-rpc
   Level: info
   Compress: true

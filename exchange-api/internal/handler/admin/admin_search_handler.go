@@ -1,11 +1,11 @@
 package admin
 
 import (
-	"github.com/otter-trade/go-serve-demo/common/i18n"
-	"github.com/otter-trade/go-serve-demo/common/xresp"
 	"github.com/otter-trade/go-serve-demo/exchange-api/internal/logic/admin"
 	"github.com/otter-trade/go-serve-demo/exchange-api/internal/svc"
 	"github.com/otter-trade/go-serve-demo/exchange-api/internal/types"
+	"github.com/otter-trade/ot-common/i18n"
+	"github.com/otter-trade/ot-common/xresp"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
 )

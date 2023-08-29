@@ -5,7 +5,7 @@ Mode: dev
 
 Log:
   ServiceName: exchange-api
-  Mode: console
+  Mode: file
   Level: info
   Compress: true
   KeepDays: 7
@@ -14,6 +14,19 @@ Log:
 Auth:
   AccessSecret: f780efee-8a5c-43f0-8652-3e603c9dcb24
   AccessExpire: 86400
+
+#Monitoring
+Prometheus:
+  Host: 127.0.0.1
+  Port: 4009
+  Path: /metrics
+
+#Link Tracking
+Telemetry:
+  Name: exchange-api
+  Endpoint: http://127.0.0.1:14268/api/traces
+  Sampler: 1.0
+  Batcher: jaeger
 
 ExchangeRpc:
   Timeout: 30000

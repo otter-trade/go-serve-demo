@@ -2,10 +2,10 @@ package logic
 
 import (
 	"context"
-	"github.com/otter-trade/go-serve-demo/common/i18n"
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/internal/svc"
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/model"
 	"github.com/otter-trade/go-serve-demo/exchange-rpc/pb"
+	"github.com/otter-trade/ot-common/i18n"
 	"google.golang.org/grpc/status"
 	"time"
 
